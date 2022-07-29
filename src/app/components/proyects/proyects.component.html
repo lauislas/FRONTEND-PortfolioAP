@@ -1,0 +1,105 @@
+<section>
+    <div class="title">
+        <h3>{{title}}</h3>
+        <button type="button" class="btn btn-primary " (click)="openModal(content)"><i class="fa fa-plus"></i> Agregar
+            proyectos</button>
+    </div>
+
+    <div class="proyects">
+        <div class="item" *ngFor="let proyect of proyectsList">
+
+            <div class="buttons-edit">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-primary" (click)="openModalEdit(proyect,contentEdit)"><i
+                            class="fa fa-pencil"></i></button>
+                    <button type="button" class="btn btn-primary" (click)="deleteSelected(proyect.id)"><i
+                            class="fa fa-trash-o"></i></button>
+                </div>
+            </div>
+
+            <img [src]="proyect.img" alt="proyecto">
+
+            <div class="information">
+                <p>{{proyect.resumen}}</p>
+                <a href={{proyect.urlProyecto}} target="_blank" rel="noopener noreferrer"> <button type="button"
+                        class="btn btn-outline-secondary"> Ir al proyecto </button></a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Agregar nuevo proyecto </h4>
+        <button type="button" class="btn-close" (click)="modal.dismiss('Cross click')"> </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="proyectForm" (ngSubmit)=" onSubmit() ">
+
+            <div class="form-group">
+                <input type="hidden" name="id" formControlName="id">
+            </div>
+
+            <div class="form-group">
+                <label for="img" class="form-label"> <strong>Imagen del proyecto: </strong> </label>
+                <input name="img" class="form-control" formControlName="img">
+            </div>
+
+            <div class="form-group">
+                <label for="resumen" class="form-label"><strong>Resumen del proyecto: </strong></label>
+                <input name="resumen" class="form-control" formControlName="resumen">
+            </div>
+
+            <div class="form-group">
+                <label for="urlProyecto" class="form-label"><strong>Dirección del proyecto: </strong> </label>
+                <input name="urlProyecto" class="form-control" formControlName="urlProyecto"
+                    placeholder="Ej. página o repositorio.">
+            </div>
+
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" (click)="modal.close()">Guardar</button>
+                <button type="button" class="btn btn-danger" (click)="modal.close()">Cancelar</button>
+            </div>
+        </form>
+
+    </div>
+
+</ng-template>
+
+<ng-template #contentEdit let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title2"> Editar Proyecto</h4>
+        <button type="button" class="btn-close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="proyectFormEdit" (ngSubmit)="updateSelected()">
+
+
+            <div class="form-group">
+                <input type="hidden" name="id" formControlName="id">
+            </div>
+
+            <div class="form-group">
+                <label for="img" class="form-label"> <strong>Imagen del proyecto: </strong> </label>
+                <input name="img" class="form-control" formControlName="img">
+            </div>
+
+            <div class="form-group">
+                <label for="resumen" class="form-label"><strong>Resumen del proyecto: </strong></label>
+                <input name="resumen" class="form-control" formControlName="resumen">
+            </div>
+
+            <div class="form-group">
+                <label for="urlProyecto" class="form-label"><strong>Repositorio o url del proyecto: </strong> </label>
+                <input name="urlProyecto" class="form-control" formControlName="urlProyecto"
+                    placeholder="Ej. pagina o repositorio.">
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" (click)="modal.close()">Actualizar</button>
+                <button type="button" class="btn btn-danger" (click)="modal.close()">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</ng-template>

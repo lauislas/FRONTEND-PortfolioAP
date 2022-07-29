@@ -1,0 +1,128 @@
+<section>
+    <div class="title">
+        <h3>{{title}}</h3>
+        <button type="button" class="btn btn-primary" (click)="openModal(content)"><i class="fa fa-plus"></i> Agregar
+            Cursos</button>
+    </div>
+
+    <div class="section" *ngFor="let course of coursesList">
+        <div class="logo">
+            <img [src]="course.img" alt="curso">
+        </div>
+
+        <div class="information">
+            <h3>{{course.titulo}}</h3>
+            <h5>{{course.institucion}}</h5>
+            <p> <span>{{course.inicio}}</span> - <span>{{course.fin}}</span> </p>
+            <a href={{course.urlCredencial}} target="_blank" rel="noopener noreferrer"> <button type="button"
+                    class="btn btn-outline-secondary"> Mostrar Credencial </button></a>
+        </div>
+
+        <div class="buttons-edit">
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-primary" (click)="openModalEdit(course,contentEdit)"><i
+                        class="fa fa-pencil"></i></button>
+                <button type="button" class="btn btn-primary" (click)="deleteSelected(course.id)"><i
+                        class="fa fa-trash-o"></i></button>
+            </div>
+        </div>
+
+    </div>
+
+</section>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Agregar nuevo curso </h4>
+        <button type="button" class="btn-close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="courseForm" (ngSubmit)="onSubmit()">
+
+            <div class="form-group">
+                <input type="hidden" name="id" formControlName="id">
+            </div>
+
+            <div class="form-group">
+                <label for="titulo" class="form-label"><strong>Título:</strong></label>
+                <input type="text" name="titulo" class="form-control" formControlName="titulo">
+            </div>
+
+            <div class="form-group">
+                <label for="institucion" class="form-label"><strong>Institución:</strong></label>
+                <input type="text" name="institucion" class="form-control" formControlName="institucion">
+            </div>
+
+            <div class="form-group">
+                <label for="inicio" class="form-label"><strong>Fecha de comienzo:</strong></label>
+                <input type="text" name="inicio" class="form-control" formControlName="inicio">
+            </div>
+
+            <div class="form-group">
+                <label for="fin" class="form-label"><strong>Fecha de finalización:</strong></label>
+                <input type="text" name="fin" class="form-control" formControlName="fin">
+            </div>
+
+            <div class="form-group">
+                <label for="img" class="form-label"><strong>Url Logo:</strong></label>
+                <input type="text" name="img" class="form-control" formControlName="img"
+                    placeholder="Ingresar url del logo si encuentra.">
+            </div>
+
+            <div class="form-group">
+                <label for="urlCredencial" class="form-label"><strong>Url Credencial:</strong></label>
+                <input name="urlCredencial" class="form-control" formControlName="urlCredencial">
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" (click)="modal.close()">Guardar</button>
+                <button type="button" class="btn btn-danger" (click)="modal.close()">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</ng-template>
+
+<ng-template #contentEdit let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title2"> Editar Curso </h4>
+        <button type="button" class="btn-close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="courseFormEdit" (ngSubmit)="updateSelected()">
+
+            <div class="form-group">
+                <input type="hidden" name="id" formControlName="id">
+            </div>
+            <div class="form-group">
+                <label for="titulo" class="form-label"><strong>Título:</strong></label>
+                <input name="titulo" class="form-control" formControlName="titulo">
+            </div>
+            <div class="form-group">
+                <label for="institucion" class="form-label"><strong>Institución:</strong></label>
+                <input type="text" name="institucion" class="form-control" formControlName="institucion">
+            </div>
+            <div class="form-group">
+                <label for="inicio" class="form-label"><strong>Fecha de comienzo:</strong></label>
+                <input name="inicio" class="form-control" formControlName="inicio">
+            </div>
+            <div class="form-group">
+                <label for="fin" class="form-label"><strong>Fecha de finalización:</strong></label>
+                <input name="fin" class="form-control" formControlName="fin">
+            </div>
+            <div class="form-group">
+                <label for="img" class="form-label"><strong>Url Logo:</strong></label>
+                <input name="img" class="form-control" formControlName="img"
+                    placeholder="Ingresar url del logo si encuentra.">
+            </div>
+            <div class="form-group">
+                <label for="urlCredencial" class="form-label"><strong>Url Credencial:</strong></label>
+                <input name="urlCredencial" class="form-control" formControlName="urlCredencial">
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" (click)="modal.close()">Actualizar</button>
+                <button type="button" class="btn btn-danger" (click)="modal.close()">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</ng-template>

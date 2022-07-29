@@ -1,0 +1,61 @@
+<section>
+    <div class="about" *ngFor="let about of aboutInfo">
+
+        <div class="profile">
+            <img [src]="about.img" alt="perfil">
+            <h3>{{about.nombreCompleto}}</h3>
+            <h5>{{about.titulo}}</h5>
+            <p>{{about.ciudad}}</p>
+        </div>
+
+        <div class="profile-info">
+            <p>{{about.resumen}}</p>
+        </div>
+
+        <div class="button-edit">
+            <button type="button" class="btn btn-primary" (click)="openModalEdit(about,contentEdit)"><i
+                class="fa fa-pencil"></i></button>
+        </div>
+    </div>
+
+</section>
+
+<ng-template #contentEdit let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title2"> Editar información personal </h4>
+        <button type="button" class="btn-close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="aboutFormEdit" (ngSubmit)="updateSelected()">
+
+            <div class="form-group">
+                <input type="hidden" name="id" formControlName="id">
+            </div>
+            <div class="form-group">
+                <label for="nombreCompleto" class="form-label"><strong>Nombre Completo:</strong></label>
+                <input name="nombreCompleto" class="form-control" formControlName="nombreCompleto">
+            </div>
+            <div class="form-group">
+                <label for="titulo" class="form-label"><strong>Título:</strong></label>
+                <input type="text" name="titulo" class="form-control" formControlName="titulo">
+            </div>
+            <div class="form-group">
+                <label for="ciudad" class="form-label"><strong>Ubicación:</strong></label>
+                <input name="ciudad" class="form-control" formControlName="ciudad">
+            </div>
+            <div class="form-group">
+                <label for="resumen" class="form-label"><strong>Sobre mí:</strong></label>
+                <input name="resumen" class="form-control" formControlName="resumen">
+            </div>
+            <div class="form-group">
+                <label for="img" class="form-label"><strong>Foto perfil:</strong></label>
+                <input name="img" class="form-control" formControlName="img">
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" (click)="modal.close()">Actualizar</button>
+                <button type="button" class="btn btn-danger" (click)="modal.close()">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</ng-template>

@@ -1,0 +1,86 @@
+<section>
+    <div class="title">
+        <h3>{{title}}</h3>
+        <button type="button" class="btn btn-primary " (click)="openModal(content)"><i class="fa fa-plus"></i> Agregar
+            habilidades</button>
+    </div>
+
+    <div class="skills" >
+        <div class="item" *ngFor="let skill of skillsList">
+            <div class="buttons-edit">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-primary" (click)="openModalEdit(skill,contentEdit)"><i
+                            class="fa fa-pencil"></i></button>
+                    <button type="button" class="btn btn-primary" (click)="deleteSelected(skill.id)"><i
+                            class="fa fa-trash-o"></i></button>
+                </div>
+            </div>
+            <img [src]="skill.img" alt="habilidad"><p>{{skill.informacion}}</p>
+        </div>
+    </div>
+
+</section>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Agregar nueva habilidad</h4>
+        <button type="button" class="btn-close" (click)="modal.dismiss('Cross click')"> </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="skillForm" (ngSubmit)="onSubmit() ">
+
+            <div class="form-group">
+                <input type="hidden" name="id" formControlName="id">
+            </div>
+
+            <div class="form-group">
+                <label for="img" class="form-label"> <strong>Agregar habilidad:</strong> </label>
+                <input name="img" class="form-control" formControlName="img" placeholder="Ingresar url de la imagen de la nueva habilidad.">
+            </div>
+
+            <div class="form-group">
+                <label for="informacion" class="form-label"><strong>Información:</strong></label>
+                <input name="informacion" class="form-control" formControlName="informacion" placeholder="Ingresar información relevante sobre la habilidad." >
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" (click)="modal.close()">Guardar</button>
+                <button type="button" class="btn btn-danger" (click)="modal.close()">Cancelar</button>
+            </div>
+        </form>
+
+    </div>
+
+</ng-template>
+
+<ng-template #contentEdit let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title2"> Editar habilidad</h4>
+        <button type="button" class="btn-close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+
+    <div class="modal-body">
+        <form [formGroup]="skillFormEdit" (ngSubmit)="updateSelected()">
+
+
+            <div class="form-group">
+                <input type="hidden" name="id" formControlName="id">
+            </div>
+
+            <div class="form-group">
+                <label for="img" class="form-label"> <strong>Agregar habilidad:</strong> </label>
+                <input name="img" class="form-control" formControlName="img" >
+            </div>
+
+            <div class="form-group">
+                <label for="informacion" class="form-label"><strong>Información:</strong></label>
+                <input name="informacion" class="form-control" formControlName="informacion">
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" (click)="modal.close()">Actualizar</button>
+                <button type="button" class="btn btn-danger" (click)="modal.close()">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</ng-template>

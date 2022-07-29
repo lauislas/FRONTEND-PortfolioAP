@@ -1,0 +1,134 @@
+<section>
+    <div class="title">
+        <h3>{{title}}</h3>
+        <button type="button" class="btn btn-primary" (click)="openModal(content)"><i class="fa fa-plus"></i> Agregar
+            experiencia</button>
+    </div>
+
+    <div class="section" *ngFor="let experience of experiencesList">
+
+        <div class="logo">
+            <img [src]="experience.img" alt="experencia">
+        </div>
+
+        <div class="information">
+            <h3>{{experience.empresa}}</h3>
+            <h5>{{experience.puesto}}</h5>
+            <p> <span> {{experience.inicio}}</span> - <span>{{experience.fin}}</span> </p>
+            <p>{{experience.resumen}}</p>
+        </div>
+
+        <div class="buttons-edit">
+            <div class="btn-group" role="group">
+                <button type="button" class="btn btn-primary" (click)="openModalEdit(experience,contentEdit)"><i
+                        class="fa fa-pencil"></i></button>
+                <button type="button" class="btn btn-primary" (click)="deleteSelected(experience.id)"><i
+                        class="fa fa-trash-o"></i></button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Agregar nueva experiencia laboral </h4>
+        <button type="button" class="btn-close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="experienceForm" (ngSubmit)=" onSubmit() ">
+
+            <div class="form-group">
+                <input type="hidden" name="id" formControlName="id">
+            </div>
+
+            <div class="form-group">
+                <label for="empresa" class="form-label"> <strong>Empresa:</strong> </label>
+                <input name="empresa" class="form-control" formControlName="empresa">
+            </div>
+
+            <div class="form-group">
+                <label for="puesto" class="form-label"><strong>Puesto:</strong></label>
+                <input name="puesto" class="form-control" formControlName="puesto">
+            </div>
+
+            <div class="form-group">
+                <label for="inicio" class="form-label"><strong>Fecha de comienzo:</strong> </label>
+                <input name="inicio" class="form-control" formControlName="inicio">
+            </div>
+
+            <div class="form-group">
+                <label for="fin" class="form-label"><strong>Fecha de finalización:</strong> </label>
+                <input name="fin" class="form-control" formControlName="fin">
+            </div>
+
+            <div class="form-group">
+                <label for="img" class="form-label"><strong>Url Logo:</strong> </label>
+                <input name="img" class="form-control" formControlName="img"
+                    placeholder="Ingresar url del logo si encuentra.">
+            </div>
+
+            <div class="form-group">
+                <label for="resumen" class="form-label"><strong>Información adicional sobre el trabajo:</strong> </label>
+                <input name="resumen" class="form-control" formControlName="resumen">
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" (click)="modal.close()">Guardar</button>
+                <button type="button" class="btn btn-danger" (click)="modal.close()">Cancelar</button>
+            </div>
+        </form>
+
+    </div>
+
+</ng-template>
+
+<ng-template #contentEdit let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title2"> Editar experiencia laboral </h4>
+        <button type="button" class="btn-close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="experienceFormEdit" (ngSubmit)="updateSelected()">
+
+            <div class="form-group">
+                <input type="hidden" name="id" formControlName="id">
+            </div>
+
+            <div class="form-group">
+                <label for="empresa" class="form-label"> <strong>Empresa:</strong> </label>
+                <input name="empresa" class="form-control" formControlName="empresa">
+            </div>
+
+            <div class="form-group">
+                <label for="puesto" class="form-label"><strong>Puesto:</strong></label>
+                <input name="puesto" class="form-control" formControlName="puesto">
+            </div>
+
+            <div class="form-group">
+                <label for="inicio" class="form-label"><strong>Fecha de comienzo:</strong> </label>
+                <input name="inicio" class="form-control" formControlName="inicio">
+            </div>
+
+            <div class="form-group">
+                <label for="fin" class="form-label"><strong>Fecha de finalización:</strong> </label>
+                <input name="fin" class="form-control" formControlName="fin">
+            </div>
+
+            <div class="form-group">
+                <label for="img" class="form-label"><strong>Url Logo:</strong> </label>
+                <input name="img" class="form-control" formControlName="img"
+                    placeholder="Ingresar url del logo si encuentra.">
+            </div>
+
+            <div class="form-group">
+                <label for="resumen" class="form-label"><strong>Información adicional sobre el trabajo:</strong> </label>
+                <input name="resumen" class="form-control" formControlName="resumen">
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" (click)="modal.close()">Actualizar</button>
+                <button type="button" class="btn btn-danger" (click)="modal.close()">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</ng-template>

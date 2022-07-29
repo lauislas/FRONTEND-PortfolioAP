@@ -1,0 +1,97 @@
+<section>
+
+    <div class="title">
+        <h3>{{title}}</h3>
+        <button type="button" class="btn btn-primary" (click)="openModal(content)"><i class="fa fa-plus"></i> Agregar
+            Conocimientos</button>
+    </div>
+
+    <div class="h-skills">
+
+        <div class="item" *ngFor="let hSkill of hSkillsList">
+            <div class="buttons-edit">
+                <div class="btn-group" role="group">
+                    <button type="button" class="btn btn-primary" (click)="openModalEdit(hSkill,contentEdit)"><i
+                            class="fa fa-pencil"></i></button>
+                    <button type="button" class="btn btn-primary" (click)="deleteSelected(hSkill.id)"><i
+                            class="fa fa-trash-o"></i></button>
+                </div>
+            </div>
+
+            <img [src]="hSkill.conocimiento" alt="conocimiento">
+
+            <div class="progress">
+                <div class="progress-bar bg-success" role="progressbar" [style.width.%]="hSkill.porcentaje">
+                    {{hSkill.porcentaje}}%</div>
+            </div>
+
+        </div>
+    </div>
+
+</section>
+
+<ng-template #content let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Agregar nuevo conocimiento </h4>
+        <button type="button" class="btn-close" (click)="modal.dismiss('Cross click')"> </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="hSkillForm" (ngSubmit)=" onSubmit() ">
+
+            <div class="form-group">
+                <input type="hidden" name="id" formControlName="id">
+            </div>
+
+            <div class="form-group">
+                <label for="conocimiento" class="form-label"> <strong>Agregar Conocimiento:</strong> </label>
+                <input name="conocimiento" class="form-control" formControlName="conocimiento"
+                    placeholder="Ingresar url de la imagen del nuevo conocimiento.">
+            </div>
+
+            <div class="form-group">
+                <label for="porcentaje" class="form-label"><strong>Porcentaje de aprendizaje:</strong></label>
+                <input name="porcentaje" class="form-control" formControlName="porcentaje" placeholder="Ingresar solo valor númerico.">
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" (click)="modal.close()">Guardar</button>
+                <button type="button" class="btn btn-danger" (click)="modal.close()">Cancelar</button>
+            </div>
+        </form>
+
+    </div>
+
+</ng-template>
+
+<ng-template #contentEdit let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title2"> Editar Conocimiento </h4>
+        <button type="button" class="btn-close" (click)="modal.dismiss('Cross click')"></button>
+    </div>
+
+    <div class="modal-body">
+        <form [formGroup]="hSkillFormEdit" (ngSubmit)="updateSelected()">
+
+
+            <div class="form-group">
+                <input type="hidden" name="id" formControlName="id">
+            </div>
+
+            <div class="form-group">
+                <label for="conocimiento" class="form-label"> <strong>Editar Conocimiento:</strong> </label>
+                <input name="conocimiento" class="form-control" formControlName="conocimiento"
+                    placeholder="se admite imagen">
+            </div>
+
+            <div class="form-group">
+                <label for="porcentaje" class="form-label"><strong>Porcentaje de aprendizaje:</strong></label>
+                <input name="porcentaje" class="form-control" formControlName="porcentaje">
+            </div>
+
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary" (click)="modal.close()">Actualizar</button>
+                <button type="button" class="btn btn-danger" (click)="modal.close()">Cancelar</button>
+            </div>
+        </form>
+    </div>
+</ng-template>

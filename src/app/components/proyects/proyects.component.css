@@ -1,0 +1,47 @@
+.proyects {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    background-color: #b7c6d1;
+    text-align: center;
+    padding-bottom: 0.5rem;
+}
+
+.information{
+    padding: 1rem;
+}
+
+.item img{
+  max-width: 30rem;
+  box-shadow: 10px 10px 20px rgb(0, 0, 0);
+}
+
+.buttons-edit{
+    padding: 0.5rem;
+}
+
+@media screen and (max-width: 450px) {
+   
+    .proyects {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .item img {
+        width: 22rem;
+    }
+
+}
+
+@media screen and (min-width: 450px) and (max-width: 991px) {
+
+    .proyects{
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .item img {
+        width: 28rem;
+    }
+ 
+}

@@ -1,0 +1,42 @@
+<app-header></app-header>
+
+<div class="login">
+    <div class="logo">
+        <img src="assets/img/perfil.png" alt="perfil-login">
+    </div>
+
+    <div class="text-center mt-4 ">
+        PORTFOLIO
+    </div>
+    <form [formGroup]="form" (ngSubmit)="onLogin()">
+
+        <div class="form-group">
+            <label for="nombreUsuario" class="form-label">Nombre de usuario: </label>
+            <input type="text" formControlName="nombreUsuario"
+                [ngClass]="{'is-invalid': nombreUsuario?.errors && nombreUsuario?.touched, 'is-valid': !nombreUsuario?.errors && nombreUsuario?.touched}"
+                class="form-control" id="nombreUsuario" aria-describedby="nombreUsuarioHelp">
+            <div *ngIf="nombreUsuario?.errors && nombreUsuario?.touched">
+                <p *ngIf="nombreUsuario?.hasError('required')" class="text-danger">
+                    El nombre de usuario es requerido.</p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="password" class="form-label">Contraseña: </label>
+            <input type="password" formControlName="password"
+                [ngClass]="{'is-invalid': password?.errors && password?.touched, 'is-valid': !password?.errors && password?.touched}"
+                class="form-control" id="inputPassword">
+            <div *ngIf="password?.errors && password?.touched">
+                <p *ngIf="password?.hasError('required')" class="text-danger">
+                    La contraseña es requerida.</p>
+                <p *ngIf="password?.errors?.['minlength']" class="text-danger">
+                    La contraseña debe ser de 8 o más caracteres.</p>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <button type="submit" class="btn btn outline success btn-block" [disabled]="!form.valid">INICIAR
+                SESION</button>
+        </div>
+    </form>
+</div>

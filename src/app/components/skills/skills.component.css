@@ -1,0 +1,30 @@
+.skills {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    background-color: #b7c6d1;
+    text-align: center;
+
+}
+
+.item img{
+    width: 15rem;
+    border: 2px solid black;
+}
+
+.buttons-edit{
+    padding: 0.5rem;
+}
+
+
+@media screen and (max-width: 450px) {
+   
+    .skills {
+        flex-direction: column;
+        text-align: center;
+        padding: 1rem 0;
+    }
+
+    
+
+}
